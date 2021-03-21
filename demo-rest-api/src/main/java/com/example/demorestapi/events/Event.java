@@ -23,6 +23,6 @@ public class Event {
     private  EventsStatus eventsStatus;
 
 
-    //Test git commit
+    
 
 }
