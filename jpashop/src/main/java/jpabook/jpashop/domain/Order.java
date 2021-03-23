@@ -10,22 +10,43 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Getter @Setter
+@Getter
+@Setter
 public class Order {
-
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member member; //주문 회원
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    private Delivery delivery;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery; //배송정보
 
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate; //주문시간 @Enumerated(EnumType.STRING)
+    private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
-    private OrderStatus status; //주문 상태 ORDER, CANCEL
+    //==연관관계 메서드==//
+//    public void setMember(Member member) {
+//        this.member = member;
+//        member.getOrders().add(this);
+//    }
+//
+//    public void addOrderItem(OrderItem orderItem) {
+//
+//        orderItems.add(orderItem);
+//        orderItem.setOrder(this);
+//    }
+//
+//    public void setDelivery(Delivery delivery) {
+//        this.delivery = delivery;
+//        delivery.setOrder(this);
+//    }
+
 }
