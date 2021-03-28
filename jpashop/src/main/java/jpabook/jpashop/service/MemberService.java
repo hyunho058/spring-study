@@ -2,12 +2,9 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 
@@ -41,12 +38,21 @@ public class MemberService {
      * @param member
      * @return
      */
+//    @Transactional // default => readOnly = false 일기/쓰기 에서 true 를 하면 쓰기가 안된다.
+//    public Long join(Member member) {
+//        System.out.println("join() member : "+member.toString());
+//        validateDuplicateMember(member); //중복회원 검증
+//        memberRepository.save(member);
+//        return member.getId();
+//    }
+
     @Transactional // default => readOnly = false 일기/쓰기 에서 true 를 하면 쓰기가 안된다.
     public Long join(Member member) {
-        validateDuplicateMember(member); //중복회원 검증
+        validateDuplicateMember(member); //중복 회원 검증 memberRepository.save(member);
         memberRepository.save(member);
         return member.getId();
     }
+
 
 
     private void validateDuplicateMember(Member member) {
