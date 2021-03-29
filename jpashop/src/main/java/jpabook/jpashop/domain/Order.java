@@ -1,7 +1,9 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -47,6 +49,65 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    /**
+     * //== 생성 메서드 ==//
+     *
+     * @param member
+     * @param delivery
+     * @param orderItems
+     * @return
+     */
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+
+        return order;
+    }
+
+    //== 비지니스 로직 ==//
+
+    /**
+     * 주문 취소
+     */
+    public void orderCancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) { //배송 상테ㅐ에 따라 취소 여부 확인 로직
+            throw new IllegalStateException("배송이 완료되면 취소를 할 수 없습니다.");
+        }
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+    //==조회 로직==//
+
+    /**
+     * 전체 주문 가격 조회
+     *
+     * @return
+     */
+    public int getTotalPrice() {
+//        int totalPrice = 0;
+//        for (OrderItem orderItem : orderItems){
+//            totalPrice += orderItem.getTotalPrice();
+//        }
+//        return totalPrice;
+
+        //TODO : java Stream or Lambda 로 로직 바꿔보기
+        //Stream
+        return orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum();
+        //Lambda
+
     }
 
 }
