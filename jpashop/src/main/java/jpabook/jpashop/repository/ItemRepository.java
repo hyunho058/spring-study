@@ -19,6 +19,7 @@ public class ItemRepository {
             em.persist(item);
         }else {
             em.merge(item);
+//            Item itemMerge = em.merge(item);//  itemMerge - 영속성을 가진 객체
         }
     }
 
