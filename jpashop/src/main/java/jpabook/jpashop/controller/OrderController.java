@@ -35,24 +35,15 @@ public class OrderController {
         return "order/orderForm";
     }
 
-    @PostMapping("/order")
+    @PostMapping(value = "/order")
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,
                         @RequestParam("count") int count) {
-
         orderService.order(memberId, itemId, count);//핵심 비즈니스 로직은 service단에서 처리해야 좋다(Controller 에서는 식벽자만 넘겨줌)
         //멀티 상품 주문 해보기
         //TODO:다중 상품 주문 해보기
         return "redirect:/orders";
     }
-
-//    @GetMapping("/orders")
-//    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
-//        List<Order> orders = orderService.findOrders(orderSearch);
-//        model.addAttribute("orders",orders);
-//
-//        return "order/orderList";
-//    }
 
     @GetMapping(value = "/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch
