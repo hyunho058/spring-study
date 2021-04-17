@@ -78,5 +78,9 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
-
+    @Transactional  //Transaction 이 끝날때 commit 발생
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);   //영속상태
+        member.setName(name);   //변경 감지
+    }
 }
