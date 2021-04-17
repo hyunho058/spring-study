@@ -88,7 +88,7 @@ public class MemberApiController {
     public Result memberV2(){
         List<Member> findMembers = memberService.findMembers();
         List<MemberDto> collect = findMembers.stream()
-                .map(m -> new MemberDto(m.getName()))
+                .map(m -> new MemberDto(m.getName(), m.getAddress()))
                 .collect(Collectors.toList());
 
         return new Result(collect.size(), collect);
@@ -104,5 +104,6 @@ public class MemberApiController {
     @AllArgsConstructor
     static class MemberDto{     //DTO
         private String name;
+        private Address address;
     }
 }
