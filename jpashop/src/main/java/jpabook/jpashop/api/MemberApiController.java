@@ -1,5 +1,6 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,11 @@ public class MemberApiController {
     public CreateMemberResponse saveMemberV2(@RequestBody @Valid CreateMemberRequest request){  //API 스팩이 바뀌지 않는 장점이 있다 (DTO)
         Member member = new Member();
         member.setName(request.getName());
+
+        //khh
+        Address address = new Address(request.getCity(), request.getStreet(), request.getZipcode());
+        member.setAddress(address);
+
         Long id = memberService.join(member);
         return new CreateMemberResponse(id);
     }
@@ -52,6 +58,10 @@ public class MemberApiController {
     @Data
     static class CreateMemberRequest{   //DTO
         private String name;
+        //khh
+        private String city;
+        private String street;
+        private String zipcode;
     }
 
     @Data
