@@ -22,7 +22,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "member")//일기 전용이 됨
+    @OneToMany(mappedBy = "member")//읽기 전용이 됨
     private List<Order> orders = new ArrayList<>();
 
 }
