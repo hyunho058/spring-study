@@ -2,6 +2,7 @@ package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -129,7 +130,18 @@ public class OrderRepository {
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery(
 //                select o From Order o join o.member m"
-                "select o from Order o join fetch o.member m join fetch o.delivery d", Order.class
+                "select o from Order o join fetch o.member m join fetch o.delivery d"
+                , Order.class
         ).getResultList();
     }
+
+    //Fetch Join 을 적용한 v3 박식에 비해 재사용성이 떨어진다
+//    public List<OrderSimpleQueryDto> findOrderDtos() {
+//        return em.createQuery(
+//                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address) " +
+//                        "from Order o " +
+//                        "join o.member m " +
+//                        "join o.delivery d", OrderSimpleQueryDto.class
+//        ).getResultList();
+//    }
 }
