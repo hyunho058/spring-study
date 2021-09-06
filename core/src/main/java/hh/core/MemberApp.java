@@ -7,8 +7,10 @@ import hh.core.member.MemberServiceImp;
 
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImp();
+        AppConfig appConfig = new AppConfig();
 
+//        MemberService memberService = new MemberServiceImp();
+        MemberService memberService = appConfig.memberService();
         Member memberA = new Member(1L, "memberA", Grade.VIP);
         memberService.join(memberA);
 
