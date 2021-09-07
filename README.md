@@ -1,5 +1,9 @@
 # SpringBoot
 
+## core
+
+* Spring 동작 원리
+
 ## jpashop
 
 * SpringBoot와 JPA 를 이용한 웹 애플리케이션 개발및 API 개발
