@@ -3,7 +3,6 @@ package hh.core;
 import hh.core.member.Grade;
 import hh.core.member.Member;
 import hh.core.member.MemberService;
-import hh.core.member.MemberServiceImp;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

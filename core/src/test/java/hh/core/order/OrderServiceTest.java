@@ -6,7 +6,6 @@ import hh.core.discount.FixDiscountPolicy;
 import hh.core.member.Grade;
 import hh.core.member.Member;
 import hh.core.member.MemberService;
-import hh.core.member.MemberServiceImp;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

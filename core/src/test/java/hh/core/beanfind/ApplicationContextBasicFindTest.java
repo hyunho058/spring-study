@@ -2,8 +2,7 @@ package hh.core.beanfind;
 
 import hh.core.AppConfig;
 import hh.core.member.MemberService;
-import hh.core.member.MemberServiceImp;
-import org.assertj.core.api.Assertions;
+import hh.core.member.MemberServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -19,21 +18,21 @@ public class ApplicationContextBasicFindTest {
     @DisplayName("빈 이름으로 조회")
     void findBeanByName(){
         MemberService memberService = ac.getBean("memberService", MemberService.class);
-        assertThat(memberService).isInstanceOf(MemberServiceImp.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
     @Test
     @DisplayName("빈 타입으로 조회")
     void findBeanByType(){
         MemberService memberService = ac.getBean(MemberService.class);
-        assertThat(memberService).isInstanceOf(MemberServiceImp.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
     @Test
     @DisplayName("구현체 타입으로 조회")
     void fidnBeanByName2(){
-        MemberService memberService = ac.getBean("memberService", MemberServiceImp.class); //구현에 의존
-        assertThat(memberService).isInstanceOf(MemberServiceImp.class);
+        MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class); //구현에 의존
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
     @Test
