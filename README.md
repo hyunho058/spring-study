@@ -1,8 +1,18 @@
-# SpringBoot
+# Spring
 
-## core
+## spring core
 
 * Spring 동작 원리
+* 스프링 컨테이너와 스프링 빈
+  * 스프링 컨테이너 - IoC, DI
+  * 의존관계 주입
+  * 빈 생성주기와 스코프
+
+## spring advanced
+
+* 스프링 핵심 디자인 패턴
+* 쓰레드 로컬
+* 스프링 AOP
 
 ## jpashop
 
