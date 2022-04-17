@@ -22,4 +22,4 @@ logging:
     org.hibernate.SQL: trace
     org.hibernate.type: trace
 
-file_dir: "/Users/file/upload/"
+file_dir: "/Users/hyunho/upload/"
