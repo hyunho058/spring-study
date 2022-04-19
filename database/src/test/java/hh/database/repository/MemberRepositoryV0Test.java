@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 class MemberRepositoryV0Test {
     Logger log = (Logger) LoggerFactory.getLogger(MemberRepositoryV0Test.class);
@@ -15,12 +16,24 @@ class MemberRepositoryV0Test {
     @Test
     void crud() throws SQLException {
         //save
-        Member member = new Member("memberV2", 10000);
+        Member member = new Member("memberV4", 10000);
         repository.save(member);
 
         //find by id
         Member findMember = repository.findById(member.getMemberId());
         Assertions.assertThat(findMember.getMemberId()).isEqualTo(member.getMemberId());
         log.info("findMember = {}", findMember);
+
+        //update
+        repository.update(member.getMemberId(), 20000);
+        Member updateMember = repository.findById(member.getMemberId());
+        Assertions.assertThat(updateMember.getMoney()).isEqualTo(20000);
+
+        //delete
+        repository.delete(member.getMemberId());
+        Assertions.assertThatThrownBy(
+                        () -> repository.findById(member.getMemberId())
+                )
+                .isInstanceOf(NoSuchElementException.class);
     }
 }

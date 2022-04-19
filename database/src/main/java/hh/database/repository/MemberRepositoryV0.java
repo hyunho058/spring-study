@@ -35,6 +35,47 @@ public class MemberRepositoryV0 {
         }
     }
 
+    public void update(String memberId, int money) throws SQLException {
+        String sql = "update member set money=? where member_id=?";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, money);
+            preparedStatement.setString(2, memberId);
+            int resultSize = preparedStatement.executeUpdate(); //Statement를 통해 준비된 SQL을 connection을 통해 실제 데이터베이스에 전달 (참고-executeUpdate() 는 int 를 반환하는데 영향받은 DB row 수를 반환한다
+            log.info("resultSize = {}", resultSize);
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
+
+    public void delete(String memberId) throws SQLException {
+        String sql = "delete from member where member_id=?";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, memberId);
+            int resultSize = preparedStatement.executeUpdate(); //Statement를 통해 준비된 SQL을 connection을 통해 실제 데이터베이스에 전달 (참고-executeUpdate() 는 int 를 반환하는데 영향받은 DB row 수를 반환한다
+            log.info("resultSize = {}", resultSize);
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
+
     public Member findById(String memberId) throws SQLException {
         String sql = "select * from member where member_id = ?";
 
