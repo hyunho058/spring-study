@@ -1,4 +1,4 @@
-package hh.database.domani;
+package hh.database.jdbc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

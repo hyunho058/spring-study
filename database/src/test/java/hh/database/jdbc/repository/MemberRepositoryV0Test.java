@@ -1,7 +1,6 @@
 package hh.database.jdbc.repository;
 
-import hh.database.domani.Member;
-import hh.database.repository.MemberRepositoryV0;
+import hh.database.jdbc.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
