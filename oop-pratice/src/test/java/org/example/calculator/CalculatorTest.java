@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -37,11 +38,10 @@ public class CalculatorTest {
         );
     }
 
-    @DisplayName("뺄셈 연산을 수행한다.")
     @Test
-    void subtractionTest() {
-        int result = Calculator.calculator(1, "-", 2);
-
-        assertThat(result).isEqualTo(-1);
+    void calculatorExceptionTest() {
+        assertThatCode(() -> Calculator.calculator(10, "/", 0))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("0으로 나눌 수 없습니다.");
     }
 }
